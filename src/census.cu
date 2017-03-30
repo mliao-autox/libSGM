@@ -19,7 +19,7 @@ limitations under the License.
 #include "internal.h"
 
 namespace {
-	static const int HOR = 9;
+	static const int HOR =  9;
 	static const int VERT = 7;
 
 	static const int threads_per_block = 16;

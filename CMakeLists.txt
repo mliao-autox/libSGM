@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 set(CUDA_ARCH "-arch=sm_50" CACHE STRING "Value of the NVCC -arch option.")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 option(ENABLE_ZED_DEMO "Build a Demo using ZED Camera" OFF)
 
@@ -18,6 +19,7 @@ add_subdirectory(src)
 
 add_subdirectory(sample/image)
 add_subdirectory(sample/movie)
+add_subdirectory(sample/bf)
 
 if(ENABLE_ZED_DEMO)
 	add_subdirectory(sample/zed)

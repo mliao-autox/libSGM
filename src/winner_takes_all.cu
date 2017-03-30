@@ -31,7 +31,7 @@ namespace {
 
 	__global__ void winner_takes_all_kernel64(uint16_t* leftDisp, uint16_t* rightDisp, const uint16_t* __restrict__ d_cost, int width, int height)
 	{
-		const float uniqueness = 0.95f;
+		const float uniqueness = 0.5f; //was 0.95f
 		const int DISP_SIZE = 64;
 		int idx = threadIdx.x;
 		int x = blockIdx.x * WTA_PIXEL_IN_BLOCK + threadIdx.y;
