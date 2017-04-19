@@ -119,7 +119,7 @@ namespace {
 	__global__ void winner_takes_all_kernel128(uint16_t* leftDisp, uint16_t* rightDisp, const uint16_t* __restrict__ d_cost, int width, int height)
 	{
 		const int DISP_SIZE = 128;
-		const float uniqueness = 0.95f;
+		const float uniqueness = 0.8f;
 
 		int idx = threadIdx.x;
 		int x = blockIdx.x * WTA_PIXEL_IN_BLOCK + threadIdx.y;
@@ -226,9 +226,9 @@ namespace {
 
 		if (idx == 0) {
 			float lhv = minCostL2 * uniqueness;
-			leftDisp[y * width + x] = (lhv < minCostL1 && abs(minDispL1 - minDispL2) > 1) ? 0 : minDispL1 + 1; // add "+1" 
+			leftDisp[y * width + x] = (lhv < minCostL1 || abs(minDispL1 - minDispL2) > 1) ? 0 : minDispL1 + 1; // add "+1" 
 			float rhv = minCostR2 * uniqueness;
-			rightDisp[y * width + x] = (rhv < minCostR1 && abs(minDispR1 - minDispR2) > 1) ? 0 : minDispR1 + 1; // add "+1" 
+			rightDisp[y * width + x] = (rhv < minCostR1 || abs(minDispR1 - minDispR2) > 1) ? 0 : minDispR1 + 1; // add "+1" 
 		}
 	}
 
